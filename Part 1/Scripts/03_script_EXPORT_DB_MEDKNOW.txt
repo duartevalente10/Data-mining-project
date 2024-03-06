@@ -1,0 +1,49 @@
+-- conectar DB
+\set dataBase db_medknow
+\set userName postgres
+\connect :dataBase :userName
+
+-- criar a view para calcular a idade dos olhos de cada paciente
+CREATE OR REPLACE VIEW PatientEyeAge AS
+SELECT
+    p.pacID,
+    p.firstName,
+    p.lastName,
+    p.birthDate,
+    CASE
+        WHEN EXTRACT(YEAR FROM age(current_date, p.birthDate)) >= ea.minAge
+             AND EXTRACT(YEAR FROM age(current_date, p.birthDate)) <= ea.maxAge THEN ea.age
+        ELSE 'Unknown'
+    END AS eyeAge
+FROM
+    patient p
+JOIN
+    eyeAge ea ON EXTRACT(YEAR FROM age(current_date, p.birthDate)) >= ea.minAge
+                AND EXTRACT(YEAR FROM age(current_date, p.birthDate)) <= ea.maxAge;
+
+-- view para mostrar a eyeAge, prescription, astigmatic, tear_rate e lenses de cada paciente
+CREATE OR REPLACE VIEW exportView AS
+SELECT
+    p.pacID,
+    pe.eyeAge,
+    dn.prescription,
+    dn.astigmatic,
+    tr.tear_rate,
+    pr.lenses
+FROM
+    patient p
+JOIN
+    PatientEyeAge pe ON p.pacID = pe.pacID
+LEFT JOIN
+    pac_doc pd ON p.pacID = pd.pacID
+LEFT JOIN
+    disease d ON pd.apointmentID = d.apointmentID
+LEFT JOIN
+    diseaseName dn ON d.diseaseName = dn.dnID
+LEFT JOIN
+    tearRate tr ON pd.apointmentID = tr.apointmentID
+LEFT JOIN
+    prescription pr ON pd.apointmentID = pr.apointmentID;
+
+
+\COPY (SELECT * FROM exportview) TO 'C:\\Users\duart\\Desktop\\AMD\\FP_A\\Data\\exportview2.csv' DELIMITER ',' CSV HEADER;

@@ -1,0 +1,5 @@
+(stalk-root, EQUAL, EDIBLE) : (205, 1099)
+(stalk-root, BULBOUS, EDIBLE) : (1460, 3027)
+(stalk-root, CLUB, EDIBLE) : (44, 447)
+(stalk-root, nan, EDIBLE) : (0, 0)
+(stalk-root, ROOTED, EDIBLE) : (0, 152)

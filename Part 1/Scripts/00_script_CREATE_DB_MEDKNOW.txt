@@ -1,0 +1,19 @@
+-- conexoes
+
+\set userName postgres
+\set hostName localhost
+\set portNumber 5432
+
+-- nome da base de dados
+\set dataBase db_medknow
+
+--a paga a db se já exitir
+DROP DATABASE IF EXISTS :dataBase;
+
+-- cria a db
+CREATE DATABASE :dataBase;
+
+-- conectar à db
+\c :dataBase :userName :hostName :portNumber;
+
+

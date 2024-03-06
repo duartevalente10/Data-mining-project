@@ -1,0 +1,131 @@
+\set dataBase db_medknow
+\set userName postgres
+\connect :dataBase :userName
+
+-- adicionar dados à tabela receptionist
+INSERT INTO receptionist (firstName, lastName, birthDate)
+VALUES
+    ('Maria', 'Santos', '1990-01-15'),
+    ('Francisco', 'Amorim', '1985-03-20'),
+    ('Alice', 'Martins', '1992-07-10');
+
+-- adicionar dados à tabela doctor
+INSERT INTO doctor (firstName, lastName, birthDate)
+VALUES
+    ('Dr. Oliver', 'Benji', '1978-09-25'),
+    ('Dra. Marta ', 'Leiria', '1982-04-12'),
+    ('Dr. Manuel', 'Santos', '1990-12-05');
+
+-- adicionar dados à tabela patient
+INSERT INTO patient (firstName, lastName, birthDate)
+VALUES
+    ('David', 'Faustino', '2005-11-08'),
+    ('Sandra', 'Alves', '2005-02-18'),
+    ('Ana', 'Amorim', '2005-06-30'),
+	('Joana', 'Ferreira', '2005-06-30'),
+	('Carlos', 'Matos', '2005-06-30'),
+	('Andre', 'Fonseca', '1999-06-30'),
+	('Igor', 'Martins', '1999-06-30'),
+	('Rita', 'Castro', '1999-06-30'),
+	('Guilherme', 'Evora', '1999-06-30'),
+	('Paulo', 'Matias', '1999-06-30'),
+	('Diogo', 'Pombo', '1999-06-30'),
+	('Maria', 'Vaz', '1945-06-30'),
+	('Martim', 'Dias', '1945-06-30'),
+	('Julio', 'Izidro', '1945-06-30'),
+	('Vasco', 'Palmeirim', '1945-06-30'),
+	('Pedro', 'Dias', '1945-06-30');
+
+-- adicionar dados à tabela consulta
+INSERT INTO pac_doc (date, hour, pacID, docID, recID) 
+VALUES
+	('2023-10-10', '09:00:00', 1, 1, 1),
+	('2023-10-10', '09:30:00', 2, 2, 2),
+	('2023-10-10', '10:00:00', 3, 3, 3),
+	('2023-10-10', '10:30:00', 4, 1, 1),
+	('2023-10-10', '11:00:00', 5, 2, 2),
+	('2023-10-10', '11:30:00', 6, 3, 3),
+	('2023-10-10', '12:00:00', 7, 1, 1),
+	('2023-10-10', '12:30:00', 8, 2, 2),
+	('2023-10-10', '13:00:00', 9, 3, 3),
+	('2023-10-10', '13:30:00', 10, 1, 1),
+	('2023-10-10', '14:00:00', 11, 2, 2),
+	('2023-10-10', '14:30:00', 12, 3, 3),
+	('2023-10-10', '15:00:00', 13, 1, 1),
+	('2023-10-10', '15:30:00', 14, 2, 2),
+	('2023-10-10', '16:00:00', 15, 3, 3),
+	('2023-10-10', '16:30:00', 16, 1, 1);
+
+-- adicionar dados à tabela diseaseName
+INSERT INTO diseaseName (prescription, astigmatic) 
+VALUES
+	('myope', TRUE),
+	('myope', FALSE),
+	('hypermetrope', TRUE),
+	('hypermetrope', FALSE);
+
+-- adicionar dados à tabela disease
+INSERT INTO disease (diseaseName, apointmentID) 
+VALUES
+	(1, 1),
+	(2, 2),
+	(3, 3),
+	(4, 4),
+	(4, 5),
+	(1, 6),
+	(1, 7),
+	(3, 8),
+	(3, 9),
+	(4, 10),
+	(4, 11),
+	(1, 12),
+	(1, 13),
+	(2, 14),
+	(3, 15),
+	(4, 16);
+
+-- adicionar dados à tabela tearRate
+INSERT INTO tearRate (tear_rate, apointmentID) 
+VALUES
+	('normal', 1),
+	('normal', 2),
+	('reduced', 3),
+	('normal', 4),
+	('reduced', 5),
+	('reduced', 6),
+	('normal', 7),
+	('reduced', 8),
+	('normal', 9),
+	('normal', 10),
+	('reduced', 11),
+	('reduced', 12),
+	('normal', 13),
+	('normal', 14),
+	('normal', 15),
+	('normal', 16);
+
+-- adicionar dados à tabela prescription
+INSERT INTO prescription (lenses, apointmentID) 
+VALUES
+	('hard', 1),
+	('soft', 2),
+	('none', 3),
+	('soft', 4),
+	('none', 5),
+	('none', 6),
+	('hard', 7),
+	('none', 8),
+	('none', 9),
+	('soft', 10),
+	('none', 11),
+	('none', 12),
+	('hard', 13),
+	('soft', 14),
+	('none', 15),
+	('soft', 16);
+
+-- adicionar dados à tabela eyeAge
+INSERT INTO eyeAge (minAge, maxAge, age) VALUES
+(0, 20, 'young'),
+(20, 45, 'presbyopic'),
+(45, 120, 'pre-presbyopic');

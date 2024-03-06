@@ -1,0 +1,74 @@
+-- conectar à db
+\set dataBase db_medknow
+\set userName postgres
+\connect :dataBase :userName;
+
+-- tabela receptionist
+CREATE TABLE receptionist (
+    recID SERIAL PRIMARY KEY,
+    firstName VARCHAR(20),
+    lastName VARCHAR(20),
+    birthDate DATE
+);
+
+-- tabela doctor
+CREATE TABLE doctor (
+    docID SERIAL PRIMARY KEY,
+    firstName VARCHAR(20),
+    lastName VARCHAR(20),
+    birthDate DATE
+);
+
+-- tabela patient
+CREATE TABLE patient (
+    pacID SERIAL PRIMARY KEY,
+    firstName VARCHAR(20),
+    lastName VARCHAR(20),
+    birthDate DATE
+);
+
+-- tabela de relacionamento entre o paciente e o medico
+CREATE TABLE pac_doc (
+    apointmentID SERIAL PRIMARY KEY,
+	date DATE,
+	hour TIME,
+    pacID INT REFERENCES patient(pacID),
+    docID INT REFERENCES doctor(docID),
+	recID INT REFERENCES receptionist(recID)
+);
+
+-- tabela diseaseName
+CREATE TABLE diseaseName (
+    dnID SERIAL PRIMARY KEY,
+    prescription VARCHAR(50),
+    astigmatic BOOLEAN
+);
+
+-- tabela disease
+CREATE TABLE disease (
+    disID SERIAL PRIMARY KEY,
+    diseaseName INT REFERENCES diseaseName(dnID),
+    apointmentID INT REFERENCES pac_doc(apointmentID)
+);
+
+-- tabela Tear Rate
+CREATE TABLE tearRate (
+    trID SERIAL PRIMARY KEY,
+    apointmentID INT REFERENCES pac_doc(apointmentID),
+    tear_rate VARCHAR(50)
+);
+
+-- tabela prescription
+CREATE TABLE prescription (
+    presID SERIAL PRIMARY KEY,
+    apointmentID INT REFERENCES pac_doc(apointmentID),
+    lenses VARCHAR(50)
+);
+
+-- Criar a tabela eyeAge
+CREATE TABLE eyeAge (
+    eaID SERIAL PRIMARY KEY,
+    minAge INT,
+    maxAge INT,
+    age VARCHAR(50)
+);
